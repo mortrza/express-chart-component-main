@@ -1,13 +1,11 @@
 const chart=document.querySelector('#btn');
-
 async function chartdata(){
     const fechdata=await fetch('./data.json');
     const data=await fechdata.json();
     const amountArray=data.map(x=>parseInt(x.amount));
     const dayArray=data.map(x=>x.day);
     let maximum=Math.max(...amountArray);
-    let ratio=maximum/50;
-    
+    let ratio=maximum/50;    
        if(ratio>1)
        {
         chart.innerHTML=data.map(x=>generatechart(x,ratio)).join('');
@@ -16,10 +14,7 @@ async function chartdata(){
         ratio=1;
         chart.innerHTML=data.map(x=>generatechart(x,ratio)).join('');
         
-       }
-
-
-    
+       }   
 }
 
 
@@ -38,13 +33,6 @@ let usDollar = Intl.NumberFormat("en-US", {
  });
 function generatechart(item,value)
 {
-
- 
-     
-
-
-console.log(item.amount)
-
     const dataa={
         dayname:item.day,
         dayamount:item.amount,
@@ -60,8 +48,6 @@ return `
 ${usDollar.format(dataa.dayamount) }
  </p>
 </div> ` ;
- 
-
 }
 
 chartdata();
